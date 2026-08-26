@@ -1,0 +1,116 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Choose delivery - Money Transfer</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Lora:wght@700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="flow.css" />
+</head>
+<body>
+  <header class="site-header">
+    <div class="header-shell">
+      <a class="brand" href="index.html" aria-label="Money Transfer home">
+        <span class="brand-mark" aria-hidden="true">
+          <svg viewBox="0 0 24 24" fill="none">
+            <path d="M4 11.2 19.5 4.5l-4.7 15-3.2-6.2L4 11.2Z" stroke="currentColor" stroke-width="1.8" stroke-linejoin="round"/>
+            <path d="m11.6 13.3 3.9-4.2" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/>
+          </svg>
+        </span>
+        <span class="brand-copy">
+          <strong>Money Transfer</strong>
+          <small>Simple, safe and easy</small>
+        </span>
+      </a>
+    </div>
+  </header>
+
+  <main class="flow-shell">
+    <nav class="progress-card" aria-label="Transfer progress">
+      <div class="progress-step done">
+        <span class="bubble" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none"><path d="m6 12 4 4 8-9" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg></span>
+        <span>Transfer details</span>
+      </div>
+      <span class="progress-line done" aria-hidden="true"></span>
+      <div class="progress-step active">
+        <span class="bubble">2</span>
+        <span>Choose delivery</span>
+      </div>
+      <span class="progress-line" aria-hidden="true"></span>
+      <div class="progress-step">
+        <span class="bubble">3</span>
+        <span>Review and send</span>
+      </div>
+    </nav>
+
+    <section class="flow-intro">
+      <p class="eyebrow">STEP 2 OF 3</p>
+      <h1>How would you like the money to be delivered?</h1>
+      <p class="lead">Choose the option that is easiest for the person receiving the money.</p>
+    </section>
+
+    <section class="delivery-card" aria-labelledby="delivery-heading">
+      <h2 id="delivery-heading">Delivery Method</h2>
+      <button class="delivery-option" id="openPaymentOption" type="button" aria-pressed="false">
+        <span class="delivery-icon" aria-hidden="true">
+          <svg viewBox="0 0 24 24" fill="none">
+            <path d="M14 5h5v5M19 5l-8 8" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"/>
+            <path d="M18 13v5a1 1 0 0 1-1 1H6a1 1 0 0 1-1-1V7a1 1 0 0 1 1-1h5" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"/>
+          </svg>
+        </span>
+        <span class="delivery-copy">
+          <strong>Open payment</strong>
+          <small>Open the payment page to complete the transfer securely.</small>
+        </span>
+        <span class="simple-badge">Simple to use</span>
+        <span class="radio" aria-hidden="true"></span>
+      </button>
+    </section>
+
+    <a class="flow-back" id="backLink" href="payment-details.html"><span aria-hidden="true">←</span> Back to transfer details</a>
+
+    <button class="primary-action" id="continueButton" type="button">
+      <span>
+        <strong>Continue</strong>
+        <small>You can review everything before sending</small>
+      </span>
+      <span class="arrow" aria-hidden="true">→</span>
+    </button>
+
+    <footer class="flow-footer">Take your time. You can review your transfer before you send it.</footer>
+  </main>
+
+  <script>
+    const params = new URLSearchParams(location.search);
+    const option = document.getElementById('openPaymentOption');
+    const continueButton = document.getElementById('continueButton');
+    const backLink = document.getElementById('backLink');
+    let selected = false;
+
+    if ([...params].length) backLink.href = `payment-details.html?${params.toString()}`;
+
+    option.addEventListener('click', () => {
+      selected = true;
+      option.classList.add('selected');
+      option.setAttribute('aria-pressed', 'true');
+    });
+
+    continueButton.addEventListener('click', () => {
+      if (!selected) {
+        option.focus();
+        option.animate([
+          { transform: 'translateX(0)' },
+          { transform: 'translateX(-6px)' },
+          { transform: 'translateX(6px)' },
+          { transform: 'translateX(0)' }
+        ], { duration: 260 });
+        return;
+      }
+      params.set('delivery', 'Open payment');
+      location.href = `review.html?${params.toString()}`;
+    });
+  </script>
+</body>
+</html>
