@@ -15,9 +15,6 @@ const openai = new OpenAI({
   apiKey: process.env.OPENAI_API_KEY
 });
 
-// ==========================================
-// TEST ROUTE
-// ==========================================
 
 app.get("/api/health", (req, res) => {
   res.json({
@@ -26,9 +23,6 @@ app.get("/api/health", (req, res) => {
   });
 });
 
-// ==========================================
-// AI TRANSACTION ASSESSMENT
-// ==========================================
 
 app.post("/api/ai-assessment", async (req, res) => {
   try {
@@ -79,9 +73,6 @@ app.post("/api/ai-assessment", async (req, res) => {
   }
 });
 
-// ==========================================
-// PAYMENT ROUTE
-// ==========================================
 
 app.post("/api/payment", async (req, res) => {
   try {
@@ -111,9 +102,6 @@ app.post("/api/payment", async (req, res) => {
   }
 });
 
-// ==========================================
-// START SERVER
-// ==========================================
 
 app.listen(PORT, () => {
   console.log("");
