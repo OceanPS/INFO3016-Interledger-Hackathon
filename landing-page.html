@@ -5,24 +5,100 @@
     <head>
         <meta charset="UTF-8">
         <title>Landing Page</title>
+
+        <link rel="stylesheet" href="landing-styling.css">
+
         <link rel="stylesheet" href="general-styling.css">
+
     </head>
+
 
     <body>
 
-        <h1>Application Name Placeholder</h1>
+        <header>
 
-        <div class="centrePrompt"">
+            <img src="remitassist-logo.png" alt="RemitAssist Logo" width="50" height="50">
 
-            <form action="">
+            <p> Money Transfer </p>
+            <p> Simple, safe and easy </p>
 
-                <input type="text" name="aiQuery" id="aiQuery">
+        </header>
 
-                <button type="submit">Submit</button>
+        <main>
+
+            <p> Send money in 3 easy steps </p>
+
+            <h1> Send money with confidence. </h1>
+
+            <p> Choose where your money is going, check the details, then send when you are ready. </p>
+
+            <div id="applicationProgress">
+
+
+            </div>
+
+            <form action="https://response-page.com" method="POST">
+
+                <div class="formBlockWhite">
+
+                    <img src="destination-icon.png" alt="Destination Icon" width="50" height="50">
+
+                    <p> 1. Where are you sending money? </p>
+                    <p> Start by choosing the country where you want to send money. </p>
+
+                    <label for="destination"> Destination Country </label>
+
+                    <select name="destination" id="destination">
+
+                        <option value="india">India</option>
+                        <option value="australia">Australia</option>
+                        <option value="china">China</option>
+                        <option value="usa">USA</option>
+
+                    </select>
+
+                </div>
+
+                <div class="formBlockBlue">
+
+                    <p> 2. Enter the amount</p>
+                    <p> You will see the exchange rate, fee, and total before you continue.</p>
+
+                    <label for="amount"> You send from Australia </label>
+                    <input type="text" name="amount" id="amount">
+
+                    <div>
+
+                        <p> Estimated amount received </p>
+                        <input type="text" name="estimatedAmount" id="estimatedAmount" placeholder="5,500.00" readonly>
+
+                    </div>
+
+                    <p> Today's rate: AUD$1.00 = ₹55. </p>
+
+                    <div class="send-row"> <span> You send </span> <strong>A$ 100.00</strong> </div>
+
+                    <div class="transfer-row"> <span> Transfer fee </span> <strong>A$ 3.99</strong> </div>
+
+                    <div class="total-row"> <span> Total to pay </span> <strong>A$ 103.99</strong> </div>
+
+                </div>
+
+                <div>
+
+                    <button type="submit"> Send Money </button>
+
+                </div>
 
             </form>
+            
+            <div> 
 
-        </div>
+                <p> Choose your language </p>
+
+            </div>
+
+        </main>
 
     </body>
 

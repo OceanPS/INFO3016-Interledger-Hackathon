@@ -1,3 +1,38 @@
-.centrePrompt {
-    width: 75%;
+label {
+
+    display: block;
+
+}
+
+header {
+
+    background-color: #12345b;
+    padding: 10px;
+
+}
+
+main {
+
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    flex-direction: column;
+
+}
+
+.formBlockWhite {
+
+    background-color: white;
+    border: solid black 1px;
+    border-radius: 10px;
+
+}
+
+.formBlockBlue {
+
+    background-color: #e8f3ff;
+    border: solid black 1px;
+    border-radius: 10px;
+
 }
