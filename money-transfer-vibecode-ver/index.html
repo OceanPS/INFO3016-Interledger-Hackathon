@@ -1,0 +1,207 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Money Transfer</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Lora:wght@700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="styles.css" />
+</head>
+<body>
+  <header class="topbar">
+    <div class="topbar-inner">
+      <a class="brand" href="#" aria-label="Money Transfer home">
+        <span class="brand-icon" aria-hidden="true">
+          <svg viewBox="0 0 24 24" fill="none">
+            <path d="M4 11.2 19.5 4.5l-4.7 15-3.2-6.2L4 11.2Z" stroke="currentColor" stroke-width="1.8" stroke-linejoin="round"/>
+            <path d="m11.6 13.3 3.9-4.2" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/>
+          </svg>
+        </span>
+        <span>
+          <strong>Money Transfer</strong>
+          <small>Simple, safe and easy</small>
+        </span>
+      </a>
+
+      <button class="help-btn" type="button">Help</button>
+    </div>
+  </header>
+
+  <main class="page-shell">
+    <section class="intro">
+      <p class="eyebrow">SEND MONEY IN 3 EASY STEPS</p>
+      <h1>Send money with confidence.</h1>
+      <p class="lead">Choose where your money is going, check the details, then send when you are ready.</p>
+    </section>
+
+    <nav class="stepper" aria-label="Money transfer progress">
+      <div class="step active">
+        <span class="step-number">1</span>
+        <span class="step-label">Choose destination</span>
+      </div>
+      <span class="step-line" aria-hidden="true"></span>
+      <div class="step">
+        <span class="step-number">2</span>
+        <span class="step-label">Review details</span>
+      </div>
+      <span class="step-line" aria-hidden="true"></span>
+      <div class="step">
+        <span class="step-number">3</span>
+        <span class="step-label">Send money</span>
+      </div>
+    </nav>
+
+    <section class="card destination-card">
+      <div class="section-heading">
+        <span class="heading-icon pale" aria-hidden="true">
+          <svg viewBox="0 0 24 24" fill="none">
+            <path d="M12 21s6-5.2 6-11a6 6 0 1 0-12 0c0 5.8 6 11 6 11Z" stroke="currentColor" stroke-width="1.8"/>
+            <circle cx="12" cy="10" r="2.2" stroke="currentColor" stroke-width="1.8"/>
+          </svg>
+        </span>
+        <div>
+          <h2>1. Where are you sending money?</h2>
+          <p>Start by choosing the country your money is going to.</p>
+        </div>
+      </div>
+
+      <label for="country">Destination country</label>
+      <div class="select-wrap">
+        <select id="country" name="country">
+          <option selected>India</option>
+          <option>United States</option>
+          <option>United Kingdom</option>
+          <option>New Zealand</option>
+          <option>Singapore</option>
+        </select>
+      </div>
+
+      <div class="receive-box">
+        <div>
+          <span>They will receive</span>
+          <strong>Indian Rupees (INR)</strong>
+        </div>
+        <span class="currency-icon" aria-hidden="true">₹</span>
+      </div>
+
+      <p class="fine-print">The receiving currency is chosen for you based on the destination country.</p>
+    </section>
+
+    <section class="card amount-card">
+      <div class="section-heading">
+        <span class="heading-icon strong" aria-hidden="true">
+          <svg viewBox="0 0 24 24" fill="none">
+            <rect x="5" y="3.5" width="14" height="17" rx="2" stroke="currentColor" stroke-width="1.8"/>
+            <path d="M8 7h8M8 11h2m2 0h2m2 0h1M8 15h2m2 0h2m2 0h1" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/>
+          </svg>
+        </span>
+        <div>
+          <h2>2. Enter the amount</h2>
+          <p>You will see the exchange rate, fee, and total before you continue.</p>
+        </div>
+      </div>
+
+      <label for="amount">You send from Australia</label>
+      <div class="money-input">
+        <span>A$</span>
+        <input id="amount" type="text" inputmode="decimal" value="100" aria-label="Amount to send in Australian dollars" />
+      </div>
+
+      <div class="estimate-box">
+        <div>
+          <span>Estimated amount received</span>
+          <strong>₹ 5,500.00</strong>
+        </div>
+        <div class="delivery-badge">
+          <span>Delivery time</span>
+          <strong>In minutes</strong>
+        </div>
+      </div>
+
+      <p class="rate">Today's rate: A$1.00 = ₹55.</p>
+
+      <div class="cost-table" role="table" aria-label="Transfer cost summary">
+        <div class="cost-row" role="row">
+          <span role="cell">You send</span>
+          <strong role="cell">A$ 100.00</strong>
+        </div>
+        <div class="cost-row" role="row">
+          <span role="cell">Transfer fee</span>
+          <strong class="fee" role="cell">A$ 3.99</strong>
+        </div>
+        <div class="cost-row total" role="row">
+          <span role="cell">Total to pay</span>
+          <strong role="cell">A$ 103.99</strong>
+        </div>
+      </div>
+    </section>
+
+    <button class="send-btn" type="button" id="sendMoneyButton">
+      <span class="send-left">
+        <span class="send-icon" aria-hidden="true">→</span>
+        <span>
+          <strong>Send money</strong>
+          <small>Review your details on the next screen</small>
+        </span>
+      </span>
+      <span class="chevron" aria-hidden="true">›</span>
+    </button>
+
+    <section class="card language-card">
+      <div class="section-heading compact">
+        <span class="heading-icon pale" aria-hidden="true">
+          <svg viewBox="0 0 24 24" fill="none">
+            <path d="M4 6h9M8.5 3v3m-3 0c1.1 3.2 3.2 5.7 6.3 7.3M11 7.5c-.7 2.6-2.4 4.8-5 6.5M13.7 20l3.5-9 3.5 9m-5.7-3h4.4" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"/>
+          </svg>
+        </span>
+        <div>
+          <h2>Choose your language</h2>
+          <p>Choose the language that is easiest for you to read.</p>
+        </div>
+      </div>
+
+      <div class="language-grid">
+        <button class="language-option selected" type="button">English</button>
+        <button class="language-option" type="button">हिन्दी</button>
+        <button class="language-option" type="button">Español</button>
+        <button class="language-option" type="button" dir="rtl">العربية</button>
+      </div>
+    </section>
+
+    <section class="card support-card">
+      <div class="section-heading compact">
+        <span class="heading-icon warm" aria-hidden="true">
+          <svg viewBox="0 0 24 24" fill="none">
+            <path d="M8.8 11.5a3.2 3.2 0 1 1 6.4 0c0 2-1.2 2.8-2.3 3.5-.8.5-1.4.9-1.4 1.8" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/>
+            <path d="M12 20h.01" stroke="currentColor" stroke-width="2.6" stroke-linecap="round"/>
+          </svg>
+        </span>
+        <div>
+          <h2>Need a hand?</h2>
+          <p>There is no rush. Our friendly support team can help you at any step.</p>
+        </div>
+      </div>
+
+      <button class="support-btn" type="button">
+        <svg viewBox="0 0 24 24" fill="none" aria-hidden="true">
+          <path d="M7.5 4.5 10 8 8.5 10a13 13 0 0 0 5.5 5.5l2-1.5 3.5 2.5-.8 3c-.2.8-1 1.3-1.8 1.2C9.5 19.8 4.2 14.5 3.3 7.1c-.1-.8.4-1.6 1.2-1.8l3-.8Z" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"/>
+        </svg>
+        Talk to support
+      </button>
+    </section>
+
+    <footer class="footer-note">Your money and personal details are protected.</footer>
+  </main>
+
+  <script>
+    document.getElementById('sendMoneyButton').addEventListener('click', () => {
+      const amount = document.getElementById('amount').value || '100';
+      const country = document.getElementById('country').value;
+      const params = new URLSearchParams({ amount, country });
+      window.location.href = `payment-details.html?${params.toString()}`;
+    });
+  </script>
+</body>
+</html>

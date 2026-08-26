@@ -1,0 +1,133 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Review your transfer - Money Transfer</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Lora:wght@700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="flow.css" />
+</head>
+<body class="review-page">
+  <header class="site-header">
+    <div class="header-shell">
+      <a class="brand" href="index.html" aria-label="Money Transfer home">
+        <span class="brand-mark" aria-hidden="true">
+          <svg viewBox="0 0 24 24" fill="none">
+            <path d="M4 11.2 19.5 4.5l-4.7 15-3.2-6.2L4 11.2Z" stroke="currentColor" stroke-width="1.8" stroke-linejoin="round"/>
+            <path d="m11.6 13.3 3.9-4.2" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/>
+          </svg>
+        </span>
+        <span class="brand-copy">
+          <strong>Money Transfer</strong>
+          <small>Simple, safe and easy</small>
+        </span>
+      </a>
+    </div>
+  </header>
+
+  <main class="flow-shell">
+    <nav class="progress-card" aria-label="Transfer progress">
+      <div class="progress-step done">
+        <span class="bubble" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none"><path d="m6 12 4 4 8-9" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg></span>
+        <span>Transfer details</span>
+      </div>
+      <span class="progress-line done" aria-hidden="true"></span>
+      <div class="progress-step done">
+        <span class="bubble" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none"><path d="m6 12 4 4 8-9" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg></span>
+        <span>Choose delivery</span>
+      </div>
+      <span class="progress-line done" aria-hidden="true"></span>
+      <div class="progress-step active">
+        <span class="bubble">3</span>
+        <span>Review and send</span>
+      </div>
+    </nav>
+
+    <section class="flow-intro">
+      <p class="eyebrow">STEP 3 OF 3</p>
+      <h1>Review your transfer</h1>
+      <p class="lead">Please take a moment to check the details below before you send your money.</p>
+    </section>
+
+    <section class="review-card recipient-card">
+      <div class="card-heading">
+        <span class="card-heading-icon" aria-hidden="true"></span>
+        <div>
+          <h2>Sending money to</h2>
+          <p class="recipient-name" id="recipientName">Maria Santos</p>
+        </div>
+      </div>
+      <div class="recipient-country">
+        <span>Destination country</span>
+        <strong id="destinationCountry">India</strong>
+      </div>
+    </section>
+
+    <section class="review-card summary-card">
+      <div class="card-heading">
+        <span class="card-heading-icon" aria-hidden="true"></span>
+        <div>
+          <h2>Transfer summary</h2>
+          <p>Here is everything included in this transfer.</p>
+        </div>
+      </div>
+
+      <div class="summary-table" aria-label="Transfer summary">
+        <div class="summary-line"><span>You send</span><strong id="youSend">₹34,117</strong></div>
+        <div class="summary-line"><span>They receive</span><strong id="theyReceive">A$500</strong></div>
+        <div class="summary-line">
+          <span>Real value</span>
+          <strong class="value-with-help"><span id="realValue">433.50</span><span class="help-square" title="Estimated value">?</span><span id="realValueCurrency">AUD</span></strong>
+        </div>
+        <div class="summary-line"><span>Exchange rate</span><strong id="exchangeRate">1 AUD = 36.50 PHP</strong></div>
+        <div class="summary-line"><span>Transfer fee</span><strong id="reviewFee">A$4.99</strong></div>
+        <div class="summary-line">
+          <span>Delivery method</span>
+          <strong class="delivery-pill"><svg viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M4 20h16M6 17h12M7 8v9m3-9v9m4-9v9m3-9v9M5 8h14L12 3 5 8Z" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"/></svg><span id="deliveryMethod">Bank deposit</span></strong>
+        </div>
+      </div>
+
+      <div class="summary-total">
+        <span>Total to pay</span>
+        <strong id="totalToPay">A$504.99</strong>
+      </div>
+    </section>
+  </main>
+
+  <script>
+    const params = new URLSearchParams(location.search);
+    const symbols = { AUD: 'A$', USD: '$', EUR: '€' };
+    const countryCurrency = {
+      India: { code: 'INR', symbol: '₹', rate: 55 },
+      'United States': { code: 'USD', symbol: '$', rate: .66 },
+      'United Kingdom': { code: 'GBP', symbol: '£', rate: .51 },
+      'New Zealand': { code: 'NZD', symbol: 'NZ$', rate: 1.09 },
+      Singapore: { code: 'SGD', symbol: 'S$', rate: .86 }
+    };
+
+    if ([...params].length) {
+      const person = params.get('person') || 'Choose a person';
+      const country = params.get('country') || 'India';
+      const amount = Math.max(0, Number(params.get('amount')) || 100);
+      const currency = params.get('currency') || 'AUD';
+      const sourceSymbol = symbols[currency] || currency + ' ';
+      const fee = amount * .025;
+      const destination = countryCurrency[country] || countryCurrency.India;
+      const received = amount * destination.rate;
+
+      document.getElementById('recipientName').textContent = person;
+      document.getElementById('destinationCountry').textContent = country;
+      document.getElementById('youSend').textContent = `${sourceSymbol}${amount.toLocaleString(undefined, {minimumFractionDigits: 2, maximumFractionDigits: 2})} ${currency}`;
+      document.getElementById('theyReceive').textContent = `${destination.symbol}${received.toLocaleString(undefined, {minimumFractionDigits: 2, maximumFractionDigits: 2})} ${destination.code}`;
+      document.getElementById('realValue').textContent = amount.toFixed(2);
+      document.getElementById('realValueCurrency').textContent = currency;
+      document.getElementById('exchangeRate').textContent = `1 ${currency} = ${destination.rate.toFixed(2)} ${destination.code}`;
+      document.getElementById('reviewFee').textContent = `${sourceSymbol}${fee.toFixed(2)}`;
+      document.getElementById('deliveryMethod').textContent = params.get('delivery') || 'Open payment';
+      document.getElementById('totalToPay').textContent = `${sourceSymbol}${(amount + fee).toFixed(2)}`;
+    }
+  </script>
+</body>
+</html>

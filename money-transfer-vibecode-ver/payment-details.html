@@ -1,0 +1,222 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Payment details</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="payment-details.css" />
+</head>
+<body>
+  <header class="page-header">
+    <div class="header-inner">
+      <div>
+        <p class="step-label">STEP 2 OF 3</p>
+        <h1>Payment details</h1>
+      </div>
+
+      <div class="protected-pill" aria-label="Your details are protected">
+        <svg viewBox="0 0 24 24" fill="none" aria-hidden="true">
+          <path d="M12 3.2 18 5.7v4.9c0 4-2.5 7.2-6 9.2-3.5-2-6-5.2-6-9.2V5.7l6-2.5Z" stroke="currentColor" stroke-width="1.8" stroke-linejoin="round"/>
+          <path d="m9.4 11.3 1.8 1.8 3.5-4" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/>
+        </svg>
+        <span>Your details are protected</span>
+      </div>
+    </div>
+  </header>
+
+  <main class="payment-page">
+    <div class="intro-row">
+      <a class="back-button" href="index.html" aria-label="Go back to the previous page">←</a>
+      <p>Take your time. Fill in these details, then check the total before<br class="desktop-break"> you continue.</p>
+    </div>
+
+    <section class="section-block recipient-section">
+      <h2>Who are you sending money to?</h2>
+      <p class="section-subtitle">Choose someone from your saved contacts.</p>
+
+      <button class="new-contact" type="button" id="newContactBtn">New contact</button>
+
+      <label class="field-label" for="contactSearch">Find a saved contact</label>
+      <div class="search-box">
+        <svg viewBox="0 0 24 24" fill="none" aria-hidden="true">
+          <circle cx="11" cy="11" r="6.5" stroke="currentColor" stroke-width="1.8"/>
+          <path d="m16 16 4 4" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/>
+        </svg>
+        <input id="contactSearch" type="search" placeholder="Search by name" autocomplete="off" />
+      </div>
+
+      <div class="contact-grid" id="contactGrid">
+        <button class="contact-card" type="button" data-name="Margaret Lee">
+          <span class="avatar">M</span>
+          <span class="contact-copy">
+            <strong>Margaret Lee</strong>
+            <small>Saved contact</small>
+          </span>
+        </button>
+
+        <button class="contact-card" type="button" data-name="Daniel Wong">
+          <span class="avatar">D</span>
+          <span class="contact-copy">
+            <strong>Daniel Wong</strong>
+            <small>Saved contact</small>
+          </span>
+        </button>
+
+        <button class="contact-card" type="button" data-name="Sofia Martin">
+          <span class="avatar">S</span>
+          <span class="contact-copy">
+            <strong>Sofia Martin</strong>
+            <small>Saved contact</small>
+          </span>
+        </button>
+      </div>
+    </section>
+
+    <hr class="divider" />
+
+    <section class="section-block amount-section">
+      <h2>How much would you like to send?</h2>
+      <p class="section-subtitle">Enter the amount you want the recipient to receive.</p>
+
+      <label class="field-label" for="transferAmount">Transfer amount</label>
+      <div class="amount-input-wrap">
+        <span id="amountSymbol">$</span>
+        <input id="transferAmount" type="number" min="0" step="0.01" value="100" inputmode="decimal" aria-label="Transfer amount" />
+      </div>
+    </section>
+
+    <hr class="divider" />
+
+    <section class="section-block currency-section">
+      <h2>Which currency are you using?</h2>
+      <p class="section-subtitle" id="currencyDescription">Australian dollars are selected for you.</p>
+
+      <div class="currency-grid" role="group" aria-label="Choose your currency">
+        <button class="currency-option selected" type="button" data-code="AUD" data-symbol="$" data-name="Australian dollars">Australian dollars (AUD)</button>
+        <button class="currency-option" type="button" data-code="USD" data-symbol="$" data-name="US dollars">US dollars (USD)</button>
+        <button class="currency-option" type="button" data-code="EUR" data-symbol="€" data-name="Euros">Euros (EUR)</button>
+      </div>
+    </section>
+
+    <section class="summary-card" aria-labelledby="summaryHeading">
+      <h2 id="summaryHeading">Please check your transfer</h2>
+
+      <div class="summary-row">
+        <span>Sending to</span>
+        <strong id="summaryPerson">Choose a person</strong>
+      </div>
+      <div class="summary-row">
+        <span>Transfer amount</span>
+        <strong id="summaryAmount">$100.00 AUD</strong>
+      </div>
+      <div class="summary-row">
+        <span>Transfer fee</span>
+        <strong id="summaryFee">$2.50 AUD</strong>
+      </div>
+      <div class="summary-row total-row">
+        <span>Total you will pay</span>
+        <strong id="summaryTotal">$102.50 AUD</strong>
+      </div>
+    </section>
+
+    <button class="continue-button" type="button" id="continueButton" aria-label="Continue to step 3">→</button>
+  </main>
+
+  <footer class="page-footer">
+    Need a moment? Your choices stay on this page while you review them.
+  </footer>
+
+  <script>
+    const params = new URLSearchParams(window.location.search);
+    const amountInput = document.getElementById('transferAmount');
+    const amountSymbol = document.getElementById('amountSymbol');
+    const summaryPerson = document.getElementById('summaryPerson');
+    const summaryAmount = document.getElementById('summaryAmount');
+    const summaryFee = document.getElementById('summaryFee');
+    const summaryTotal = document.getElementById('summaryTotal');
+    const currencyDescription = document.getElementById('currencyDescription');
+    const currencyButtons = [...document.querySelectorAll('.currency-option')];
+    const contactCards = [...document.querySelectorAll('.contact-card')];
+    const contactSearch = document.getElementById('contactSearch');
+
+    let currentCurrency = { code: 'AUD', symbol: '$', name: 'Australian dollars' };
+    let selectedPerson = '';
+
+    const amountFromPreviousPage = Number(params.get('amount'));
+    if (Number.isFinite(amountFromPreviousPage) && amountFromPreviousPage > 0) {
+      amountInput.value = amountFromPreviousPage;
+    }
+
+    function money(value) {
+      return `${currentCurrency.symbol}${value.toFixed(2)} ${currentCurrency.code}`;
+    }
+
+    function updateSummary() {
+      const amount = Math.max(0, Number(amountInput.value) || 0);
+      const fee = amount * 0.025;
+
+      amountSymbol.textContent = currentCurrency.symbol;
+      summaryAmount.textContent = money(amount);
+      summaryFee.textContent = money(fee);
+      summaryTotal.textContent = money(amount + fee);
+      summaryPerson.textContent = selectedPerson || 'Choose a person';
+    }
+
+    contactCards.forEach((card) => {
+      card.addEventListener('click', () => {
+        selectedPerson = card.dataset.name;
+        contactCards.forEach(c => c.classList.toggle('selected', c === card));
+        updateSummary();
+      });
+    });
+
+    contactSearch.addEventListener('input', () => {
+      const query = contactSearch.value.trim().toLowerCase();
+      contactCards.forEach(card => {
+        card.hidden = !card.dataset.name.toLowerCase().includes(query);
+      });
+    });
+
+    currencyButtons.forEach((button) => {
+      button.addEventListener('click', () => {
+        currencyButtons.forEach(b => b.classList.toggle('selected', b === button));
+        currentCurrency = {
+          code: button.dataset.code,
+          symbol: button.dataset.symbol,
+          name: button.dataset.name
+        };
+        currencyDescription.textContent = `${currentCurrency.name} are selected for you.`;
+        updateSummary();
+      });
+    });
+
+    amountInput.addEventListener('input', updateSummary);
+
+    document.getElementById('newContactBtn').addEventListener('click', () => {
+      const name = window.prompt('Enter the new contact name:');
+      if (!name || !name.trim()) return;
+      selectedPerson = name.trim();
+      contactCards.forEach(c => c.classList.remove('selected'));
+      updateSummary();
+    });
+
+    document.getElementById('continueButton').addEventListener('click', () => {
+      if (!selectedPerson) {
+        summaryPerson.classList.add('needs-attention');
+        document.querySelector('.recipient-section').scrollIntoView({ behavior: 'smooth', block: 'center' });
+        return;
+      }
+      summaryPerson.classList.remove('needs-attention');
+      params.set('amount', String(Math.max(0, Number(amountInput.value) || 0)));
+      params.set('currency', currentCurrency.code);
+      params.set('person', selectedPerson);
+      window.location.href = `delivery.html?${params.toString()}`;
+    });
+
+    updateSummary();
+  </script>
+</body>
+</html>
