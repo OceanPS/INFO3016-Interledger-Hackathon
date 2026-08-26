@@ -8,4 +8,4 @@ It is an general AI assistant to help international students manage and more imp
 
 AI Declaration, We, Declare that generative Artificial intelligence, Canva AI  was used to create graphics of application using customised human prompts based upon human conceptual mapping, for the purpose of presenting information.  Also we acknowledge Canva AI was used to produce presentation format.
 
-Additionally, the repository contains a folder named "money-transfer-vibecode-ver" which is almost entirely AI coded, and is used within the representation for the mockup. It is only included in the submission after consulting Mr. Robert Beutel
+Additionally, the repository contains a folder named "money-transfer-vibecode-ver" which is almost entirely AI coded, and is used within the representation for the mockup. It is only included in the submission after consulting Mr. Robert Beutel. It is used within the presentation and as a demonstration.
